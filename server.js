@@ -28,60 +28,19 @@ const addDemoHeaders = (req, res, next) => {
  * Configure Express middleware
  */
 
-// Serve static files from the public directory
+// 1. Serve static files from the public directory
 app.use(express.static(path.join(__dirname, 'public')));
-// Set EJS as the templating engine
+// 2. Set EJS as the templating engine
 app.set('view engine', 'ejs');
-// Tell Express where to find your templates
+// 3. Tell Express where to find your templates
 app.set('views', path.join(__dirname, 'src/views'));
-// Middleware to make NODE_ENV available to all templates
-app.use((req, res, next) => {
-    res.locals.NODE_ENV = NODE_ENV.toLowerCase() || 'production';
-    // Continue to the next middleware or route handler
-    next();
-});
-// Middleware to Log incoming requests to the console
+// 4. Middleware to Log incoming requests to the console
 app.use((req, res, next) => {
     // Skip logging for routes that start with /. (like /.well-known/)
     if (!req.path.startsWith('/.')) {
         console.log(`${req.method} ${req.url}`);
     }
     next(); // Pass control to the next middleware or route
-});
-// Middleware to add global data to all templates
-app.use((req, res, next) => {
-    // Add current year for copyright
-    res.locals.currentYear = new Date().getFullYear();
-
-    next();
-});
-// Global middleware for time-based greeting
-app.use((req, res, next) => {
-    const currentHour = new Date().getHours();
-
-    if (currentHour < 12) {
-        res.locals.greeting = `<p>Good Morning, ${name}!</p>`;
-    } else if (currentHour < 17) {
-        res.locals.greeting = `<p>Good Afternoon, ${name}!</p>`;
-    } else {
-        res.locals.greeting = `<p>Good Evening, ${name}!</p>`;
-    }
-
-    next();
-});
-
-// Global middleware for random theme selection
-app.use((req, res, next) => {
-    const themes = ['blue-theme', 'green-theme', 'red-theme'];
-    const randomTheme = themes[Math.floor(Math.random() * themes.length)];
-    res.locals.bodyClass = randomTheme;
-    next();
-});
-
-// Global middleware to share query parameters with templates
-app.use((req, res, next) => {
-    res.locals.queryParams = req.query || {};
-    next();
 });
 
 
