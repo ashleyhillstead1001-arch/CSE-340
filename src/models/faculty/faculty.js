@@ -74,20 +74,23 @@ const faculty = {
     }
 };
 
+const getAllFaculty = () => {
+    return faculty;
+}
+
 const getFacultyById = (facultyId) => {
-    // TODO: Look up faculty member by ID, return null if not found
+    return faculty[facultyId] || null;
 };
 
-const getSortedFaculty = (sortBy) => {
-    // TODO: Validate sortBy parameter (name, department, or title), default to 'name' if invalid
-
+const getSortedFaculty = (faculty, sortBy) => {
+    const validSortFields = ['name', 'department', 'title'];
+    if (!validSortFields.includes(sortBy)) sortBy = 'name';
     // Create an array of all faculty members
     const facultyArray = [];
     for (const key in faculty) {
         // Add each individual faculty object to the array
         facultyArray.push({...faculty[key], id: key});
     }
-
     // Sort the array by the chosen property
     facultyArray.sort((a, b) => {
         // Compare the property values
@@ -99,9 +102,8 @@ const getSortedFaculty = (sortBy) => {
         }
         return 0; // They are equal
     });
-
     // Return the sorted array
     return facultyArray;
 };
 
-export { getFacultyById, getSortedFaculty };
+export { getAllFaculty, getFacultyById, getSortedFaculty };

@@ -10,20 +10,20 @@
     <div class="sections">
         <div class="sections-intro">
             <h3 style="text-decoration: underline;">Sorting</h3>
-    <% if (queryParams.sort) { %>
-        <div class="sort-message">
-            <p>Currently sorted by: <%= queryParams.sort %></p>
-        </div>
-    <% } else { %>
-        <div class="sort-message">
-            <p>No sorting applied, using default sorting by time.</p>
-        </div>
-    <% } %>
+            <% if (queryParams.sort === 'professor' || queryParams.sort === 'room' || queryParams.sort === 'time') { %>
+                <div class="sort-message">
+                    <p>Currently sorted by: <%= currentSort %></p>
+                </div>
+            <% } else { %>
+                <div class="sort-message">
+                    <p>No sorting applied, using default sorting by time.</p>
+                </div>
+            <% } %>
         <div class="sections-header">
             <p>Available Sections</p>
             <div class="sort-options">
                 <span>Sort by: </span>
-                <a href="/catalog/<%= course.id %>" class="<%= currentSort === 'time' ? 'active' : '' %>">Time</a>
+                <a href="/catalog/<%= course.id %>?sort=time" class="<%= currentSort === 'time' ? 'active' : '' %>">Time</a>
                 <a href="/catalog/<%= course.id %>?sort=professor" class="<%= currentSort === 'professor' ? 'active' : '' %>">Professor</a>
                 <a href="/catalog/<%= course.id %>?sort=room" class="<%= currentSort === 'room' ? 'active' : '' %>">Room</a>
             </div>

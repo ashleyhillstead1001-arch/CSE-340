@@ -11,6 +11,8 @@ import { addDemoHeaders } from '../middleware/demo/headers.js';
 import { catalogPage, courseDetailPage } from './catalog/catalog.js';
 // The basic page controllers from ./index.js
 import { homePage, aboutPage, demoPage, testErrorPage } from './index.js';
+//The faculty controllers from ./faculty/faculty.js
+import { facultyPage, facultyDetailPage } from './faculty/faculty.js';
 
 /**
  * Add route definitions
@@ -25,5 +27,8 @@ router.get('/catalog/:courseId', courseDetailPage);
 router.get('/demo', addDemoHeaders, demoPage);
 // Route to trigger a test error
 router.get('/test-error', testErrorPage);
+// Faculty routes
+router.get('/faculty', facultyPage);
+router.get('/faculty/:facultyId', facultyDetailPage);
 
 export default router;
