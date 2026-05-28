@@ -7,12 +7,12 @@ const router = Router();
 */
 // The demo headers middleware from ../middleware/demo/headers.js
 import { addDemoHeaders } from '../middleware/demo/headers.js';
-// The catalog controllers from ./catalog/catalog.js
-import { catalogPage, courseDetailPage } from './catalog/catalog.js';
+// The course controllers from ./course/course.js
+import { courseListPage, courseDetailPage } from './course/course.js';
 // The basic page controllers from ./index.js
 import { homePage, aboutPage, demoPage, testErrorPage } from './index.js';
 //The faculty controllers from ./faculty/faculty.js
-import { facultyPage, facultyDetailPage } from './faculty/faculty.js';
+import { facultyListPage, facultyDetailPage } from './faculty/faculty.js';
 
 /**
  * Add route definitions
@@ -20,15 +20,15 @@ import { facultyPage, facultyDetailPage } from './faculty/faculty.js';
 // Home and basic pages
 router.get('/', homePage);
 router.get('/about', aboutPage);
-// Course catalog routes
-router.get('/catalog', catalogPage);
-router.get('/catalog/:courseId', courseDetailPage);
+// Course course routes
+router.get('/course', courseListPage);
+router.get('/course/:courseSlug', courseDetailPage);
 // Demo page with special middleware
 router.get('/demo', addDemoHeaders, demoPage);
 // Route to trigger a test error
 router.get('/test-error', testErrorPage);
 // Faculty routes
-router.get('/faculty', facultyPage);
-router.get('/faculty/:facultyId', facultyDetailPage);
+router.get('/faculty', facultyListPage);
+router.get('/faculty/:facultySlug', facultyDetailPage);
 
 export default router;
